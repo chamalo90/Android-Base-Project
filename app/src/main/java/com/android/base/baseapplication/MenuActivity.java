@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 public class MenuActivity extends ActionBarActivity {
@@ -14,13 +15,15 @@ public class MenuActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu); // Lien vers le .xml de cette activité
+        Intent intent = getIntent(); // Récupération de la variable (inutile) transmise.
+        String key = intent.getStringExtra("key"); // Via son identifiant
+        Toast.makeText(getBaseContext(),key, Toast.LENGTH_SHORT).show(); // On l'imprime dans un toast (message temporaire affiché à l'écran)
 
-        Button buttonExit = (Button) findViewById(R.id.exit);
+        Button buttonExit = (Button) findViewById(R.id.exit); // à nouveau, liaison vers un bouton
         buttonExit.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent myIntent = new Intent(MenuActivity.this, MainActivity.class);
-                myIntent.putExtra("key", "coucou"); //Optional parameters
+                Intent myIntent = new Intent(MenuActivity.this, MainActivity.class); // Renvoi vers l'activité de départ.
                 MenuActivity.this.startActivity(myIntent);
             }
         });
